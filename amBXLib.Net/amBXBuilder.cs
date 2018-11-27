@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Threading;
 using amBXLib.Net.Factories;
-using amBXLib.Net.Interop;
+using amBXLib.Net.Device;
+using amBXLib.Net.Device.Components;
 using amBXLib.Net.Tasks;
 
 namespace amBXLib.Net
@@ -9,16 +9,16 @@ namespace amBXLib.Net
     public class amBXBuilder
     {
       private readonly amBXDeviceManager deviceManager;
-      private readonly LightFactory lightFactory;
-      private readonly FanFactory fanFactory;
-      private readonly RumbleFactory rumbleFactory;
+      private readonly IFactory<Light> lightFactory;
+      private readonly IFactory<Fan> fanFactory;
+      private readonly IFactory<Rumble> rumbleFactory;
       private readonly AsyncUpdateManager asyncUpdate;
       private readonly amBX amBX;
 
       private int updatesPerSecond;
-      private bool useThreads;
+      private bool asyncUpdateEnabled;
 
-      public amBXBuilder(amBXDeviceManager deviceManager, LightFactory lightFactory, FanFactory fanFactory, RumbleFactory rumbleFactory, MainTaskManager mainTask, AsyncUpdateManager asyncUpdate)
+      public amBXBuilder(amBXDeviceManager deviceManager, IFactory<Light> lightFactory, IFactory<Fan> fanFactory, IFactory<Rumble> rumbleFactory, MainTaskManager mainTask, AsyncUpdateManager asyncUpdate)
       {
         this.deviceManager = deviceManager;
         this.lightFactory = lightFactory;
@@ -37,11 +37,8 @@ namespace amBXLib.Net
       /// </summary>
       public amBXBuilder WithConnection(uint majorVersion, uint minorVersion, string applicationName = "", string applicationVersion = "", bool useThreads = false)
       {
-
-
-
-        this.useThreads = useThreads;
-        deviceManager.Connect(majorVersion, minorVersion, applicationName, applicationVersion, useThreads);
+        asyncUpdateEnabled = useThreads;
+        deviceManager.Connect(majorVersion, minorVersion, applicationName, applicationVersion, asyncUpdateEnabled);
         return this;
       }
 
@@ -81,7 +78,7 @@ namespace amBXLib.Net
       {
         deviceManager.CheckConnection();
         var r = new IntPtr();
-        ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.CreateEvent(deviceManager.amBXPtr, file, file.Length, ref r));
+        ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.CreateEvent(deviceManager.DevicePtr, file, file.Length, ref r));
         return r;
       }
 
@@ -89,7 +86,7 @@ namespace amBXLib.Net
       {
         deviceManager.CheckConnection();
         var r = new IntPtr();
-        ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.CreateMovie(deviceManager.amBXPtr, file, file.Length, ref r));
+        ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.CreateMovie(deviceManager.DevicePtr, file, file.Length, ref r));
         return r;
       }*/
 
@@ -101,7 +98,7 @@ namespace amBXLib.Net
 
       public amBX Build()
       {
-        if (useThreads)
+        if (asyncUpdateEnabled)
         {
           asyncUpdate.Start();
         }

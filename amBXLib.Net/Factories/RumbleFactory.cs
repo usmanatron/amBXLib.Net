@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using amBXLib.Net.Components;
+using amBXLib.Net.Delegates;
+using amBXLib.Net.Device.Components;
 using amBXLib.Net.Exceptions;
 using amBXLib.Net.Interface;
-using amBXLib.Net.Interop;
+using amBXLib.Net.Device;
 
 namespace amBXLib.Net.Factories
 {
-  public class RumbleFactory
+  public class RumbleFactory : IFactory<Rumble>
     {
       private readonly amBXDeviceManager deviceManager;
 
@@ -30,7 +31,7 @@ namespace amBXLib.Net.Factories
       {
         deviceManager.CheckConnection();
         var r = new IntPtr();
-        ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.CreateRumble(deviceManager.amBXPtr, componentDirection, componentHeight, ref r));
+        ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.CreateRumble(deviceManager.DevicePtr, componentDirection, componentHeight, ref r));
         return r;
       }
   }

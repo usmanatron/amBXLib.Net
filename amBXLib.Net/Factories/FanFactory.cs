@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using amBXLib.Net.Components;
+using amBXLib.Net.Delegates;
 using amBXLib.Net.Exceptions;
 using amBXLib.Net.Interface;
-using amBXLib.Net.Interop;
+using amBXLib.Net.Device;
+using amBXLib.Net.Device.Components;
 
 namespace amBXLib.Net.Factories
 {
-  public class FanFactory
+  public class FanFactory : IFactory<Fan>
     {
       private readonly amBXDeviceManager deviceManager;
 
       public FanFactory(amBXDeviceManager deviceManager)
       {
         this.deviceManager = deviceManager;
-
       }
 
       public Fan Create(string name, ComponentDirection direction, ComponentHeight componentHeight)
@@ -30,7 +30,7 @@ namespace amBXLib.Net.Factories
       {
         deviceManager.CheckConnection();
         var r = new IntPtr();
-        ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.CreateFan(deviceManager.amBXPtr, componentDirection, componentHeight, ref r));
+        ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.CreateFan(deviceManager.DevicePtr, componentDirection, componentHeight, ref r));
         return r;
       }
   }

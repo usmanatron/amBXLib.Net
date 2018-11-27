@@ -1,4 +1,6 @@
-﻿using amBXLib.Net.Interop;
+﻿using amBXLib.Net.Device;
+using amBXLib.Net.Device.Components;
+using amBXLib.Net.Factories;
 using Ninject.Modules;
 
 namespace amBXLib.Net
@@ -8,6 +10,9 @@ namespace amBXLib.Net
     public override void Load()
     {
       Kernel.Bind<amBXDeviceManager>().ToSelf().InSingletonScope();
+      Kernel.Bind<IFactory<Light>>().To<LightFactory>();
+      Kernel.Bind<IFactory<Fan>>().To<FanFactory>();
+      Kernel.Bind<IFactory<Rumble>>().To<RumbleFactory>();
     }
   }
 }
