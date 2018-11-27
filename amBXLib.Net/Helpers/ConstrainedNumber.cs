@@ -13,9 +13,9 @@
       this.value = value;
     }
 
-    public float Value => ConstrainFloat();
+    public float Value => Constrain();
 
-    private float ConstrainFloat()
+    private float Constrain()
     {
       if (value < min)
       {

@@ -1,4 +1,4 @@
-﻿using amBXLib.Net.Components;
+﻿using amBXLib.Net.Device.Components;
 
 namespace amBXLib.Net.Collections
 {

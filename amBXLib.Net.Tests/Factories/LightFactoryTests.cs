@@ -1,5 +1,5 @@
 ﻿using amBXLib.Net.Factories;
-using amBXLib.Net.Interop;
+using amBXLib.Net.Device;
 using FakeItEasy;
 using NUnit.Framework;
 
