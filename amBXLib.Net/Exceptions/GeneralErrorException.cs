@@ -2,7 +2,7 @@
 {
   public class GeneralErrorException : amBXException
   {
-    public GeneralErrorException() : base(amBX_RESULT.amBX_ERROR, "General Failure:")
+    public GeneralErrorException() : base(amBXOperationResult.GenericError, "General Failure:")
     {
     }
   }

@@ -4,7 +4,7 @@
   {
 
 
-    public ThreadExistsException() : base(amBX_RESULT.amBX_THREAD_EXISTS, "A thread is currently being used for the requested function.")
+    public ThreadExistsException() : base(amBXOperationResult.ThreadExists, "A thread is currently being used for the requested function.")
     {
     }
   }

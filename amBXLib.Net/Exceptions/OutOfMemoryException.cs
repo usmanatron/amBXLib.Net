@@ -2,7 +2,7 @@
 {
   public class OutOfMemoryException : amBXException
   {
-    public OutOfMemoryException() : base(amBX_RESULT.amBX_OUT_OF_MEMORY, "Could not allocate memory.")
+    public OutOfMemoryException() : base(amBXOperationResult.OutOfMemory, "Could not allocate memory.")
     {
     }
   }

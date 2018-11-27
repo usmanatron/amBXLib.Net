@@ -4,46 +4,46 @@ namespace amBXLib.Net.Exceptions
 {
   static class ExceptionHelper
   {
-    public static void CheckForException(amBX_RESULT result)
+    public static void CheckForException(amBXOperationResult result)
     {
       switch (result)
       {
-        case amBX_RESULT.amBX_OK:
+        case amBXOperationResult.Ok:
           break;
-        case amBX_RESULT.amBX_NO_SPACE:
+        case amBXOperationResult.NoSpace:
           throw new NoSpaceException();
-        case amBX_RESULT.amBX_ERROR:
+        case amBXOperationResult.GenericError:
           throw new GeneralErrorException();
-        case amBX_RESULT.amBX_NOT_FOUND:
+        case amBXOperationResult.NotFound:
           throw new NotFoundException();
-        case amBX_RESULT.amBX_VERSION_NOT_FOUND:
+        case amBXOperationResult.amBXVersionNotFound:
           throw new VersionNotFoundException();
-        case amBX_RESULT.amBX_BAD_ARGS:
+        case amBXOperationResult.BadArguments:
           throw new BadArgsException();
-        case amBX_RESULT.amBX_OUT_OF_RANGE:
+        case amBXOperationResult.OutOfRange:
           throw new OutOfRangeException();
-        case amBX_RESULT.amBX_OUT_OF_MEMORY:
+        case amBXOperationResult.OutOfMemory:
           throw new OutOfMemoryException();
-        case amBX_RESULT.amBX_NOT_INSTALLED:
+        case amBXOperationResult.amBXNotInstalled:
           throw new NotInstalledException();
-        case amBX_RESULT.amBX_OLD_VERSION:
+        case amBXOperationResult.amBXVersionTooOld:
           throw new OldVersionException();
-        case amBX_RESULT.amBX_ENGINE_LOST:
+        case amBXOperationResult.EngineLost:
           throw new ConnectionLostException();
-        case amBX_RESULT.amBX_SENDING_TIMEOUT:
+        case amBXOperationResult.SendTimeout:
           throw new SendTimeoutException();
-        case amBX_RESULT.amBX_NOT_THREADED:
+        case amBXOperationResult.NotThreaded:
           throw new NotThreadedException();
-        case amBX_RESULT.amBX_BAD_THREADID:
+        case amBXOperationResult.BadThreadId:
           throw new BadThreadIdException();
-        case amBX_RESULT.amBX_THREAD_EXISTS:
+        case amBXOperationResult.ThreadExists:
           throw new ThreadExistsException();
-        case amBX_RESULT.amBX_UPDATE_TIMEOUT:
+        case amBXOperationResult.UpdateTimeout:
           throw new UpdateTimeoutException();
-        case amBX_RESULT.amBX_THREAD_TIMEOUT:
+        case amBXOperationResult.ThreadTimeout:
           throw new ThreadTimeoutException();
         default:
-          throw new ArgumentOutOfRangeException(nameof(result), result, null);
+          throw new ArgumentOutOfRangeException(nameof(result), result, "Unexpected exception type returned");
       }
     }
   }

@@ -2,7 +2,7 @@
 {
   public class NotInstalledException : amBXException
   {
-    public NotInstalledException() : base(amBX_RESULT.amBX_NOT_INSTALLED, "amBX is not installed.")
+    public NotInstalledException() : base(amBXOperationResult.amBXNotInstalled, "amBX is not installed.")
     {
     }
 

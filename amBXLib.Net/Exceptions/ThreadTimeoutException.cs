@@ -4,7 +4,7 @@
   {
 
 
-    public ThreadTimeoutException() : base(amBX_RESULT.amBX_THREAD_TIMEOUT, "Request to run a thread timed out.")
+    public ThreadTimeoutException() : base(amBXOperationResult.ThreadTimeout, "Request to run a thread timed out.")
     {
     }
   }

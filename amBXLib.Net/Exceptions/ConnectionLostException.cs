@@ -4,7 +4,7 @@
   {
 
 
-    public ConnectionLostException() : base(amBX_RESULT.amBX_ENGINE_LOST, "Connection to amBX has been lost.")
+    public ConnectionLostException() : base(amBXOperationResult.EngineLost, "Connection to amBX has been lost.")
     {
     }
   }

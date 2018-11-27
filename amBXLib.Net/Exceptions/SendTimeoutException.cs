@@ -4,7 +4,7 @@
   {
 
 
-    public SendTimeoutException() : base(amBX_RESULT.amBX_SENDING_TIMEOUT, "Request to send script timed out.")
+    public SendTimeoutException() : base(amBXOperationResult.SendTimeout, "Request to send script timed out.")
     {
     }
   }

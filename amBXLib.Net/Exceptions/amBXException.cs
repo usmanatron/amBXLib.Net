@@ -7,9 +7,9 @@ namespace amBXLib.Net.Exceptions
   /// </summary>
   public class amBXException : Exception
   {
-    public amBX_RESULT ErrorNumber { get; }
+    public amBXOperationResult ErrorNumber { get; }
 
-    public amBXException(amBX_RESULT errorNumber, string message) : base(message)
+    public amBXException(amBXOperationResult errorNumber, string message) : base(message)
     {
       ErrorNumber = errorNumber;
     }

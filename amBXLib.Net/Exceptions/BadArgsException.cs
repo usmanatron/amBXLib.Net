@@ -2,7 +2,7 @@
 {
   public class BadArgsException : amBXException
   {
-    public BadArgsException() : base(amBX_RESULT.amBX_BAD_ARGS, "Bad argument detected (usually a null pointer).")
+    public BadArgsException() : base(amBXOperationResult.BadArguments, "Bad argument detected (usually a null pointer).")
     {
     }
   }

@@ -4,7 +4,7 @@
   {
 
 
-    public OldVersionException() : base(amBX_RESULT.amBX_OLD_VERSION, "amBX is installed, but is not the right version.")
+    public OldVersionException() : base(amBXOperationResult.amBXVersionTooOld, "amBX is installed, but is not the right version.")
     {
     }
   }

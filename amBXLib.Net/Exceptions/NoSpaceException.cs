@@ -2,7 +2,7 @@
 {
   public class NoSpaceException : amBXException
   {
-    public NoSpaceException() : base(amBX_RESULT.amBX_NO_SPACE, "Out of buffer space")
+    public NoSpaceException() : base(amBXOperationResult.NoSpace, "Out of buffer space")
     {
     }
   }

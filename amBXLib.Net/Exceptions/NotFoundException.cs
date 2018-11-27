@@ -2,7 +2,7 @@
 {
   public class NotFoundException : amBXException
   {
-    public NotFoundException() : base(amBX_RESULT.amBX_NOT_FOUND, "File or device not found.")
+    public NotFoundException() : base(amBXOperationResult.NotFound, "File or device not found.")
     {
     }
   }

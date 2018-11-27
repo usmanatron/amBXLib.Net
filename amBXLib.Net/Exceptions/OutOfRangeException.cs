@@ -4,7 +4,7 @@
   {
 
 
-    public OutOfRangeException() : base(amBX_RESULT.amBX_OUT_OF_RANGE, "Argument out of range.")
+    public OutOfRangeException() : base(amBXOperationResult.OutOfRange, "Argument out of range.")
     {
     }
   }

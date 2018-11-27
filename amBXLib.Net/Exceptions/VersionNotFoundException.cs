@@ -3,7 +3,7 @@
   public class VersionNotFoundException : amBXException
   {
     public VersionNotFoundException()
-      : base(amBX_RESULT.amBX_VERSION_NOT_FOUND, "Expected version of amBX API not found.")
+      : base(amBXOperationResult.amBXVersionNotFound, "Expected version of amBX API not found.")
     {
     }
   }

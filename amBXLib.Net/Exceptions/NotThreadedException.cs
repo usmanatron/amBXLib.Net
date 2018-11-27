@@ -4,7 +4,7 @@
   {
 
 
-    public NotThreadedException() : base(amBX_RESULT.amBX_NOT_THREADED, "A threaded function was called, but threading is not enabled.")
+    public NotThreadedException() : base(amBXOperationResult.NotThreaded, "A threaded function was called, but threading is not enabled.")
     {
     }
   }
