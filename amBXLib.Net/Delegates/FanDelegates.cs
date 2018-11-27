@@ -2,18 +2,16 @@
 using System.Runtime.InteropServices;
 using amBXLib.Net.Interface;
 
-namespace amBXLib.Net.Interop
+namespace amBXLib.Net.Delegates
 {
-  public class FanDelegates
+  public class FanDelegates : ComponentDelegates
   {
-    public ReleaseDelegate Release;
-    public SetIntensityDelegate SetIntensity;
-    public GetIntensityDelegate GetIntensity;
-    public GetLocationDelegate GetLocation;
-    public GetEnabledDelegate GetEnabled;
-    public SetEnabledDelegate SetEnabled;
-    public SetUpdatePropertiesDelegate SetUpdateProperties;
-    public GetUpdatePropertiesDelegate GetUpdateProperties;
+    public readonly SetIntensityDelegate SetIntensity;
+    public readonly GetIntensityDelegate GetIntensity;
+    public readonly GetEnabledDelegate GetEnabled;
+    public readonly SetEnabledDelegate SetEnabled;
+    public readonly SetUpdatePropertiesDelegate SetUpdateProperties;
+    public readonly GetUpdatePropertiesDelegate GetUpdateProperties;
 
     public FanDelegates(FanInterface fanInterface)
     {
@@ -27,29 +25,22 @@ namespace amBXLib.Net.Interop
       GetUpdateProperties = Marshal.GetDelegateForFunctionPointer<GetUpdatePropertiesDelegate>(fanInterface.GetUpdatePropertiesPtr);
     }
 
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate amBXOperationResult SetIntensityDelegate(IntPtr fanPtr, float intensity);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT ReleaseDelegate(IntPtr fanPtr);
+    public delegate amBXOperationResult GetIntensityDelegate(IntPtr fanPtr, ref float intensity);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT SetIntensityDelegate(IntPtr fanPtr, float Intensity);
+    public delegate amBXOperationResult SetEnabledDelegate(IntPtr fanPtr, ComponentEnabled state);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT GetIntensityDelegate(IntPtr fanPtr, ref float Intensity);
+    public delegate amBXOperationResult GetEnabledDelegate(IntPtr fanPtr, ref ComponentEnabled state);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT GetLocationDelegate(IntPtr fanPtr, ref ComponentDirection Location);
+    public delegate amBXOperationResult SetUpdatePropertiesDelegate(IntPtr fanPtr, Int64 fanUpdateInterval, float fanDelta);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT SetEnabledDelegate(IntPtr fanPtr, ComponentEnabled State);
-
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT GetEnabledDelegate(IntPtr fanPtr, ref ComponentEnabled State);
-
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT SetUpdatePropertiesDelegate(IntPtr fanPtr, Int64 FanUpdateIntervalMS, float fFanDelta);
-
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT GetUpdatePropertiesDelegate(IntPtr fanPtr, ref Int64 FanUpdateIntervalMS, ref float FanDelta);
+    public delegate amBXOperationResult GetUpdatePropertiesDelegate(IntPtr fanPtr, ref Int64 fanUpdateInterval, ref float fanDelta);
   }
 }

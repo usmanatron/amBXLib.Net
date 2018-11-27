@@ -2,20 +2,18 @@
 using System.Runtime.InteropServices;
 using amBXLib.Net.Interface;
 
-namespace amBXLib.Net.Interop
+namespace amBXLib.Net.Delegates
 {
-  public class LightDelegates
+  public class LightDelegates : ComponentDelegates
   {
-    public ReleaseDelegate Release;
-    public SetColDelegate SetCol;
-    public GetColDelegate GetCol;
-    public SetFadeTimeDelegate SetFadeTime;
-    public GetFadeTimeDelegate GetFadeTime;
-    public GetLocationDelegate GetLocation;
-    public SetEnabledDelegate SetEnabled;
-    public GetEnabledDelegate GetEnabled;
-    public SetUpdatePropertiesDelegate SetUpdateProperties;
-    public GetUpdatePropertiesDelegate GetUpdateProperties;
+    public readonly SetColDelegate SetCol;
+    public readonly GetColDelegate GetCol;
+    public readonly SetFadeTimeDelegate SetFadeTime;
+    public readonly GetFadeTimeDelegate GetFadeTime;
+    public readonly SetEnabledDelegate SetEnabled;
+    public readonly GetEnabledDelegate GetEnabled;
+    public readonly SetUpdatePropertiesDelegate SetUpdateProperties;
+    public readonly GetUpdatePropertiesDelegate GetUpdateProperties;
 
     public LightDelegates(LightInterface lightInterface)
     {
@@ -35,33 +33,27 @@ namespace amBXLib.Net.Interop
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT ReleaseDelegate(IntPtr IamBXLightPtr);
+    public delegate amBXOperationResult SetColDelegate(IntPtr lightPtr, float red, float green, float blue);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT SetColDelegate(IntPtr IamBXLight, float fRed, float fGreen, float fBlue);
+    public delegate amBXOperationResult GetColDelegate(IntPtr lightPtr, ref float red, ref float green, ref float blue);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT GetColDelegate(IntPtr IamBXLight, ref float fRed, ref float fGreen, ref float fBlue);
+    public delegate amBXOperationResult SetFadeTimeDelegate(IntPtr lightPtr, int fadeTime);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT SetFadeTimeDelegate(IntPtr IamBXLightPtr, int FadeTimeMS);
+    public delegate amBXOperationResult GetFadeTimeDelegate(IntPtr lightPtr, ref int fadeTime);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT GetFadeTimeDelegate(IntPtr IamBXLightPtr, ref int FadeTimeMS);
+    public delegate amBXOperationResult SetEnabledDelegate(IntPtr lightPtr, [MarshalAs(UnmanagedType.I1)] bool isEnabled);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT GetLocationDelegate(IntPtr IamBXLightPtr, ref ComponentDirection Location);
+    public delegate amBXOperationResult GetEnabledDelegate(IntPtr lightPtr, [MarshalAs(UnmanagedType.I1)] ref bool isEnabled);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT SetEnabledDelegate(IntPtr IamBXLightPtr, [MarshalAs(UnmanagedType.I1)] bool Enabled);
+    public delegate amBXOperationResult SetUpdatePropertiesDelegate(IntPtr lightPtr, Int64 lightUpdateInterval, float lightDelta);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT GetEnabledDelegate(IntPtr IamBXLightPtr, [MarshalAs(UnmanagedType.I1)] ref bool Enabled);
-
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT SetUpdatePropertiesDelegate(IntPtr IamBXLightPtr, Int64 LightUpdateIntervalMS, float fLightDelta);
-
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT GetUpdatePropertiesDelegate(IntPtr IamBXLightPtr, ref Int64 lightUpdateIntervalMS, ref float fLightDelta);
+    public delegate amBXOperationResult GetUpdatePropertiesDelegate(IntPtr lightPtr, ref Int64 lightUpdateInterval, ref float lightDelta);
   }
 }

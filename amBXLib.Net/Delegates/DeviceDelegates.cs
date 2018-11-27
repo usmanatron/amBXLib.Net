@@ -2,24 +2,24 @@
 using System.Runtime.InteropServices;
 using amBXLib.Net.Interface;
 
-namespace amBXLib.Net.Interop
+namespace amBXLib.Net.Delegates
 {
   /// <summary>
   /// Holds the delegates which connect to functions in DeviceInterface
   /// </summary>
   public class DeviceDelegates
   {
-    public ReleaseDelegate Release;
-    public CreateLightDelegate CreateLight;
-    public CreateFanDelegate CreateFan;
-    public CreateRumbleDelegate CreateRumble;
-    public CreateMovieDelegate CreateMovie;
-    public CreateEventDelegate CreateEvent;
-    public SetAllEnabledDelegate SetAllEnabled;
-    public UpdateDelegate Update;
-    public GetVersionInfoDelegate GetVersionInfo;
-    public RunThreadDelegate RunThread;
-    public StopThreadDelegate StopThread;
+    public readonly ReleaseDelegate Release;
+    public readonly CreateLightDelegate CreateLight;
+    public readonly CreateFanDelegate CreateFan;
+    public readonly CreateRumbleDelegate CreateRumble;
+    public readonly CreateMovieDelegate CreateMovie;
+    public readonly CreateEventDelegate CreateEvent;
+    public readonly SetAllEnabledDelegate SetAllEnabled;
+    public readonly UpdateDelegate Update;
+    public readonly GetVersionInfoDelegate GetVersionInfo;
+    public readonly RunThreadDelegate RunThread;
+    public readonly StopThreadDelegate StopThread;
 
     public DeviceDelegates(DeviceInterface amBXInterface)
     {
@@ -38,37 +38,37 @@ namespace amBXLib.Net.Interop
 
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT ReleaseDelegate(IntPtr IamBXPtr);
+    public delegate amBXOperationResult ReleaseDelegate(IntPtr devicePtr);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT CreateLightDelegate(IntPtr IamBXPtr, ComponentDirection componentDirection, ComponentHeight componentHeight, ref IntPtr IamBXLightPtr);
+    public delegate amBXOperationResult CreateLightDelegate(IntPtr devicePtr, ComponentDirection componentDirection, ComponentHeight componentHeight, ref IntPtr lightPtr);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT CreateFanDelegate(IntPtr IamBXPtr, ComponentDirection componentDirection, ComponentHeight componentHeight, ref IntPtr amBXFanPtr);
+    public delegate amBXOperationResult CreateFanDelegate(IntPtr devicePtr, ComponentDirection componentDirection, ComponentHeight componentHeight, ref IntPtr fanPtr);
 
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT CreateRumbleDelegate(IntPtr IamBXPtr, ComponentDirection componentDirection, ComponentHeight componentHeight, ref IntPtr amBXRumble);
+    public delegate amBXOperationResult CreateRumbleDelegate(IntPtr devicePtr, ComponentDirection componentDirection, ComponentHeight componentHeight, ref IntPtr rumblePtr);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT CreateMovieDelegate(IntPtr IamBXPtr, [MarshalAs(UnmanagedType.LPArray)] byte[] File, int Size, ref IntPtr MoviePtr);
+    public delegate amBXOperationResult CreateMovieDelegate(IntPtr devicePtr, [MarshalAs(UnmanagedType.LPArray)] byte[] file, int size, ref IntPtr moviePtr);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT CreateEventDelegate(IntPtr IamBXPtr, [MarshalAs(UnmanagedType.LPArray)] byte[] File, int Size, ref IntPtr EventPtr);
+    public delegate amBXOperationResult CreateEventDelegate(IntPtr devicePtr, [MarshalAs(UnmanagedType.LPArray)] byte[] file, int size, ref IntPtr eventPtr);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT SetAllEnabledDelegate(IntPtr IamBXPtr, [MarshalAs(UnmanagedType.I1)] bool Enabled);
+    public delegate amBXOperationResult SetAllEnabledDelegate(IntPtr devicePtr, [MarshalAs(UnmanagedType.I1)] bool isEnabled);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT UpdateDelegate(IntPtr IamBXPtr, int MaxWaitInMilliseconds);
+    public delegate amBXOperationResult UpdateDelegate(IntPtr devicePtr, int maxWaitInMilliseconds);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT GetVersionInfoDelegate(IntPtr IamBXPtr, ref int Major, ref int Minor, ref int Revision, ref int Build);
+    public delegate amBXOperationResult GetVersionInfoDelegate(IntPtr devicePtr, ref int major, ref int minor, ref int revision, ref int build);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT RunThreadDelegate(IntPtr IamBXPtr, amBX_ThreadType ThreadType, int ThreadID);
+    public delegate amBXOperationResult RunThreadDelegate(IntPtr devicePtr, amBXThreadType threadType, int threadId);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBX_RESULT StopThreadDelegate(IntPtr IamBXPtr, int ThreadID);
+    public delegate amBXOperationResult StopThreadDelegate(IntPtr devicePtr, int threadId);
   }
 }
