@@ -1,9 +1,9 @@
 ﻿using System;
+using amBXLib.Net.Delegates;
 using amBXLib.Net.Exceptions;
 using amBXLib.Net.Helpers;
-using amBXLib.Net.Interop;
 
-namespace amBXLib.Net.Components
+namespace amBXLib.Net.Device.Components
 {
   public class Light : ComponentBase
   {
@@ -16,27 +16,27 @@ namespace amBXLib.Net.Components
 
     #region Overrides
 
-    protected override amBX_RESULT GetLocation(ref ComponentDirection location)
+    protected override amBXOperationResult GetLocation(ref ComponentDirection location)
     {
       return lightDelegates.GetLocation(ComponentPtr, ref location);
     }
 
     // Unlike other components, a Light returns a bool.  We convert this as appropriate
-    protected override amBX_RESULT GetIsEnabled(ref ComponentEnabled isEnabled)
+    protected override amBXOperationResult GetIsEnabled(ref ComponentEnabled isEnabled)
     {
 
       var lightEnabled = false;
       var result = lightDelegates.GetEnabled(ComponentPtr, ref lightEnabled);
-      isEnabled = lightEnabled ? ComponentEnabled.ENABLED : ComponentEnabled.DISABLED;
+      isEnabled = lightEnabled ? ComponentEnabled.Enabled : ComponentEnabled.Disabled;
       return result;
     }
 
-    protected override amBX_RESULT EnableComponent()
+    protected override amBXOperationResult EnableComponent()
     {
       return lightDelegates.SetEnabled(ComponentPtr, true);
     }
 
-    protected override amBX_RESULT DisableComponent()
+    protected override amBXOperationResult DisableComponent()
     {
       return lightDelegates.SetEnabled(ComponentPtr, false);
     }
@@ -49,7 +49,7 @@ namespace amBXLib.Net.Components
       }
       finally
       {
-        ComponentPtr = IntPtr.Zero;
+        EntityPtr = IntPtr.Zero;
         lightDelegates = null;
       }
     }

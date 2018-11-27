@@ -1,4 +1,4 @@
-﻿namespace amBXLib.Net.Components
+﻿namespace amBXLib.Net.Device.Components
 {
     class ComponentExtraProperties
     {

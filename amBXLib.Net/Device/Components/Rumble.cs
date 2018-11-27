@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
+using amBXLib.Net.Delegates;
 using amBXLib.Net.Exceptions;
 using amBXLib.Net.Helpers;
-using amBXLib.Net.Interop;
+using amBXLib.Net.Device;
 
-namespace amBXLib.Net.Components
+namespace amBXLib.Net.Device.Components
 {
   public class Rumble : ComponentBase
   {
@@ -17,23 +18,23 @@ namespace amBXLib.Net.Components
 
     #region Overrides
 
-    protected override amBX_RESULT GetLocation(ref ComponentDirection location)
+    protected override amBXOperationResult GetLocation(ref ComponentDirection location)
     {
       return rumbleDelegates.GetLocation(ComponentPtr, ref location);
     }
 
-    protected override amBX_RESULT GetIsEnabled(ref ComponentEnabled isEnabled)
+    protected override amBXOperationResult GetIsEnabled(ref ComponentEnabled isEnabled)
     {
       return rumbleDelegates.GetEnabled(ComponentPtr, ref isEnabled);
     }
 
-    protected override amBX_RESULT EnableComponent()
+    protected override amBXOperationResult EnableComponent()
     {
       return rumbleDelegates.SetEnabled(ComponentPtr, true);
     }
 
     // NOTE: This doesn't always work on Rumbles - more investigation is needed
-    protected override amBX_RESULT DisableComponent()
+    protected override amBXOperationResult DisableComponent()
     {
       return rumbleDelegates.SetEnabled(ComponentPtr, false);
     }
@@ -134,7 +135,7 @@ namespace amBXLib.Net.Components
       }
       finally
       {
-        ComponentPtr = IntPtr.Zero;
+        EntityPtr = IntPtr.Zero;
         rumbleDelegates = null;
       }
     }

@@ -1,9 +1,8 @@
 ﻿using System;
-using amBXLib.Net.Components;
+using amBXLib.Net.Delegates;
 using amBXLib.Net.Exceptions;
-using amBXLib.Net.Interop;
 
-namespace amBXLib.Net.Components
+namespace amBXLib.Net.Device.Components
 {
   public class Fan : ComponentBase
   {
@@ -17,24 +16,24 @@ namespace amBXLib.Net.Components
 
     #region Overrides
 
-    protected override amBX_RESULT GetLocation(ref ComponentDirection location)
+    protected override amBXOperationResult GetLocation(ref ComponentDirection location)
     {
       return fanDelegates.GetLocation(ComponentPtr, ref location);
     }
 
-    protected override amBX_RESULT GetIsEnabled(ref ComponentEnabled isEnabled)
+    protected override amBXOperationResult GetIsEnabled(ref ComponentEnabled isEnabled)
     {
       return fanDelegates.GetEnabled(ComponentPtr, ref isEnabled);
     }
 
-    protected override amBX_RESULT EnableComponent()
+    protected override amBXOperationResult EnableComponent()
     {
-      return fanDelegates.SetEnabled(ComponentPtr, ComponentEnabled.ENABLED);
+      return fanDelegates.SetEnabled(ComponentPtr, ComponentEnabled.Enabled);
     }
 
-    protected override amBX_RESULT DisableComponent()
+    protected override amBXOperationResult DisableComponent()
     {
-      return fanDelegates.SetEnabled(ComponentPtr, ComponentEnabled.DISABLED);
+      return fanDelegates.SetEnabled(ComponentPtr, ComponentEnabled.Disabled);
     }
 
     protected override void Release()
@@ -45,7 +44,7 @@ namespace amBXLib.Net.Components
       }
       finally
       {
-        ComponentPtr = IntPtr.Zero;
+        EntityPtr = IntPtr.Zero;
         fanDelegates = null;
       }
     }
