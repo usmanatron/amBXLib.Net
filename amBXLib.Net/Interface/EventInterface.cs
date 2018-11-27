@@ -7,14 +7,10 @@ namespace amBXLib.Net.Interface
   /// The order MUST NOT BE CHANGED; it needs to match that in the C class.
   /// </remarks>
   [StructLayout(LayoutKind.Sequential)]
-  public struct MovieInterface
+  public struct EventInterface
   {
-
+    public IntPtr PlayPtr;
+    public IntPtr StopPtr;
     public IntPtr ReleasePtr;
-    public IntPtr SetFrozenPtr;
-    public IntPtr GetFrozenPtr;
-    public IntPtr SetSuspendedPtr;
-    public IntPtr GetSuspendedPtr;
-    public IntPtr SeekPtr;
   }
 }

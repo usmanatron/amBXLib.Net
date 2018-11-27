@@ -1,7 +1,7 @@
 ﻿using System;
 using amBXLib.Net.Collections;
 using amBXLib.Net.Exceptions;
-using amBXLib.Net.Interop;
+using amBXLib.Net.Device;
 using amBXLib.Net.Tasks;
 
 namespace amBXLib.Net
@@ -73,8 +73,8 @@ namespace amBXLib.Net
           Lights.DisconnectAll();
           Fans.DisconnectAll();
           Rumbles.DisconnectAll();
-          Events.DisconnectAll();
-          Movies.DisconnectAll();
+          //Events.DisconnectAll(); //qqUMI
+          //Movies.DisconnectAll();
         }
         catch (Exception)
         {
@@ -90,7 +90,7 @@ namespace amBXLib.Net
           asyncUpdate.Stop();
         }
 
-        ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.Release(deviceManager.amBXPtr));
+        ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.Release(deviceManager.DevicePtr));
       }
       finally 
       {
@@ -103,14 +103,14 @@ namespace amBXLib.Net
       set
       {
         deviceManager.CheckConnection();
-        ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.SetAllEnabled(deviceManager.amBXPtr, value));
+        ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.SetAllEnabled(deviceManager.DevicePtr, value));
       }
     }
 
-    public void GetVersionInfo(ref int Major, ref int Minor, ref int Revision, ref int Build)
+    public void GetVersionInfo(ref int major, ref int minor, ref int revision, ref int build)
     {
       deviceManager.CheckConnection();
-      ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.GetVersionInfo(deviceManager.amBXPtr, ref Major, ref Minor, ref Revision, ref Build));
+      ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.GetVersionInfo(deviceManager.DevicePtr, ref major, ref minor, ref revision, ref build));
     }
   }
 }

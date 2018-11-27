@@ -8,7 +8,7 @@ using amBXLib.Net.Device.Components;
 
 namespace amBXLib.Net.Factories
 {
-  public class FanFactory : IFactory<Fan>
+  public class FanFactory : IComponentFactory<Fan>
     {
       private readonly amBXDeviceManager deviceManager;
 

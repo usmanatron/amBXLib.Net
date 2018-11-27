@@ -10,9 +10,9 @@ namespace amBXLib.Net
     public override void Load()
     {
       Kernel.Bind<amBXDeviceManager>().ToSelf().InSingletonScope();
-      Kernel.Bind<IFactory<Light>>().To<LightFactory>();
-      Kernel.Bind<IFactory<Fan>>().To<FanFactory>();
-      Kernel.Bind<IFactory<Rumble>>().To<RumbleFactory>();
+      Kernel.Bind<IComponentFactory<Light>>().To<LightFactory>();
+      Kernel.Bind<IComponentFactory<Fan>>().To<FanFactory>();
+      Kernel.Bind<IComponentFactory<Rumble>>().To<RumbleFactory>();
     }
   }
 }

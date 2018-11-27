@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
 using amBXLib.Net;
 using amBXLib.Net.Helpers;
@@ -41,7 +40,7 @@ namespace TestTool
         }
 
       }
-
+      amBX.Lights.DisconnectAll();
       amBX.Disconnect();
     }
 

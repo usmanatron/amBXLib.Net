@@ -2,18 +2,19 @@
 using System.Threading;
 using System.Threading.Tasks;
 using amBXLib.Net.Exceptions;
-using amBXLib.Net.Interop;
+using amBXLib.Net.Device;
 
 namespace amBXLib.Net.Tasks
 {
   public class MainTaskManager : TaskManagerBase
   {
     private int updatesPerSecond;
-    private CancellationTokenSource taskCanceller;
+    private readonly CancellationTokenSource taskCanceller;
 
     public MainTaskManager(amBXDeviceManager deviceManager) : base(deviceManager)
     {
-      task = new Task(Run, taskCanceller.Token);
+      taskCanceller = new CancellationTokenSource();
+      Task = new Task(Run, taskCanceller.Token);
     }
 
     public void SetRefreshRate(int updatesPerSecond)
@@ -23,7 +24,7 @@ namespace amBXLib.Net.Tasks
     
     private void Run()
     {
-      deviceManager.CheckConnection();
+      DeviceManager.CheckConnection();
       try
       {
         do
@@ -31,8 +32,8 @@ namespace amBXLib.Net.Tasks
           if (updatesPerSecond > 0)
           {
             var start = DateTime.Now;
-            deviceManager.CheckConnection();
-            ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.Update(deviceManager.amBXPtr, 0));
+            DeviceManager.CheckConnection();
+            ExceptionHelper.CheckForException(DeviceManager.DeviceDelegates.Update(DeviceManager.DevicePtr, 0));
             var duration = DateTime.Now - start;
             Thread.Sleep(Math.Max(0, (1000 / updatesPerSecond) - duration.Milliseconds));
           }

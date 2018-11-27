@@ -1,8 +1,9 @@
-﻿using amBXLib.Net.Components;
+﻿using System.Collections.Generic;
+using amBXLib.Net.Device.Experiences;
 
 namespace amBXLib.Net.Collections
 {
-  public class EventCollection : ComponentCollectionBase<Event>
+  public class EventCollection : List<Event>
   {
   }
 }

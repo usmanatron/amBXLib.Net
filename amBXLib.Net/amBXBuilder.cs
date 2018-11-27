@@ -9,16 +9,16 @@ namespace amBXLib.Net
     public class amBXBuilder
     {
       private readonly amBXDeviceManager deviceManager;
-      private readonly IFactory<Light> lightFactory;
-      private readonly IFactory<Fan> fanFactory;
-      private readonly IFactory<Rumble> rumbleFactory;
+      private readonly IComponentFactory<Light> lightFactory;
+      private readonly IComponentFactory<Fan> fanFactory;
+      private readonly IComponentFactory<Rumble> rumbleFactory;
       private readonly AsyncUpdateManager asyncUpdate;
       private readonly amBX amBX;
 
       private int updatesPerSecond;
       private bool asyncUpdateEnabled;
 
-      public amBXBuilder(amBXDeviceManager deviceManager, IFactory<Light> lightFactory, IFactory<Fan> fanFactory, IFactory<Rumble> rumbleFactory, MainTaskManager mainTask, AsyncUpdateManager asyncUpdate)
+      public amBXBuilder(amBXDeviceManager deviceManager, IComponentFactory<Light> lightFactory, IComponentFactory<Fan> fanFactory, IComponentFactory<Rumble> rumbleFactory, MainTaskManager mainTask, AsyncUpdateManager asyncUpdate)
       {
         this.deviceManager = deviceManager;
         this.lightFactory = lightFactory;

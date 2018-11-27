@@ -8,7 +8,7 @@ using amBXLib.Net.Device.Components;
 
 namespace amBXLib.Net.Factories
 {
-  public class LightFactory : IFactory<Light>
+  public class LightFactory : IComponentFactory<Light>
     {
       private readonly amBXDeviceManager deviceManager;
 

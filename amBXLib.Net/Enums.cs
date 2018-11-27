@@ -63,9 +63,9 @@ namespace amBXLib.Net
   /// <summary>
   /// The available thread types.  Currently there's only one
   /// </summary>
-  public enum amBX_ThreadType
+  public enum amBXThreadType
   {
-    amBX_Ambient_Update = 0
+    AmbientUpdate = 0
   }
 
   /// <summary>
@@ -102,9 +102,9 @@ namespace amBXLib.Net
 
   public enum ComponentEnabled
   {
-    ENABLED = 0, //'amBX Currently Enabled
-    DISABLED, //'amBX Currently Disabled
-    ENABLING, //'amBX in the process of becoming Enabled
-    DISABLING //'amBX in the process of becoming Disabled
+    Enabled = 0, //'amBX Currently Enabled
+    Disabled, //'amBX Currently Disabled
+    Enabling, //'amBX in the process of becoming Enabled
+    Disabling //'amBX in the process of becoming Disabled
   }
 }

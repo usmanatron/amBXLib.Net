@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using amBXLib.Net.Exceptions;
-using amBXLib.Net.Interop;
+using amBXLib.Net.Device;
 
 namespace amBXLib.Net.Tasks
 {
@@ -11,19 +8,19 @@ namespace amBXLib.Net.Tasks
   {
     public AsyncUpdateManager(amBXDeviceManager deviceManager) : base(deviceManager)
     {
-      task = new Task(Run);
+      Task = new Task(Run);
     }
 
     private void Run()
     {
-      deviceManager.CheckConnection();
-      ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.RunThread(deviceManager.amBXPtr, amBX_ThreadType.amBX_Ambient_Update, task.Id));
+      DeviceManager.CheckConnection();
+      ExceptionHelper.CheckForException(DeviceManager.DeviceDelegates.RunThread(DeviceManager.DevicePtr, amBXThreadType.AmbientUpdate, Task.Id));
     }
 
     public override void Stop()
     {
-      deviceManager.CheckConnection();
-      ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.StopThread(deviceManager.amBXPtr, task.Id));
+      DeviceManager.CheckConnection();
+      ExceptionHelper.CheckForException(DeviceManager.DeviceDelegates.StopThread(DeviceManager.DevicePtr, Task.Id));
     }
   }
 }

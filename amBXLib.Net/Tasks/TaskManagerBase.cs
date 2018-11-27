@@ -1,34 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using amBXLib.Net.Exceptions;
-using amBXLib.Net.Interop;
+﻿using System.Threading.Tasks;
+using amBXLib.Net.Device;
 
 namespace amBXLib.Net.Tasks
 {
-    public abstract class TaskManagerBase
+  public abstract class TaskManagerBase
+  {
+    protected readonly amBXDeviceManager DeviceManager;
+    protected Task Task;
+
+    protected TaskManagerBase(amBXDeviceManager deviceManager)
     {
-      protected readonly amBXDeviceManager deviceManager;
-      protected Task task;
-      private CancellationTokenSource taskCanceller;
+      DeviceManager = deviceManager;
+    }
 
-      protected TaskManagerBase(amBXDeviceManager deviceManager)
-      {
-        this.deviceManager = deviceManager;
-      }
-
-      public void Start()
-      {
-        task.Start();
-      }
+    public void Start()
+    {
+      Task.Start();
+    }
 
     public bool TaskIsRunning()
-      {
-        return task != null && !task.IsCompleted;
-      }
-    
-      public abstract void Stop();
+    {
+      return Task != null && !Task.IsCompleted;
     }
+
+    public abstract void Stop();
+  }
 }

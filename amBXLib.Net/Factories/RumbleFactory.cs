@@ -8,7 +8,7 @@ using amBXLib.Net.Device;
 
 namespace amBXLib.Net.Factories
 {
-  public class RumbleFactory : IFactory<Rumble>
+  public class RumbleFactory : IComponentFactory<Rumble>
     {
       private readonly amBXDeviceManager deviceManager;
 
