@@ -2,29 +2,25 @@
 {
   public class ConstrainedNumber
   {
-    private readonly float value;
-    private readonly int min;
-    private readonly int max;
+    public int Min { get; }
+    public int Max { get; }
 
-    protected ConstrainedNumber(int min, int max, float value)
+    protected ConstrainedNumber(int min, int max)
     {
-      this.min = min;
-      this.max = max;
-      this.value = value;
+      Min = min;
+      Max = max;
     }
 
-    public float Value => Constrain();
-
-    private float Constrain()
+    protected float Constrain(float value)
     {
-      if (value < min)
+      if (value < Min)
       {
-        return min;
+        return Min;
       }
 
-      if (value > max)
+      if (value > Max)
       {
-        return max;
+        return Max;
       }
 
       return value;

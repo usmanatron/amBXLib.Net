@@ -2,6 +2,9 @@
 
 namespace amBXLib.Net.Device
 {
+  /// <summary>
+  /// An entity is any part of the amBX system, from the whole device itself down to a single light
+  /// </summary>
   public abstract class amBXEntity : IDisposable
   {
     protected string Name;

@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using amBXLib.Net.Interface;
 
-namespace amBXLib.Net.Delegates
+namespace amBXLib.Net.Delegates.Components
 {
   public class FanDelegates : ComponentDelegates
   {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using amBXLib.Net.Delegates;
+using amBXLib.Net.Delegates.Experiences;
 using amBXLib.Net.Device;
 using amBXLib.Net.Device.Experiences;
 using amBXLib.Net.Exceptions;

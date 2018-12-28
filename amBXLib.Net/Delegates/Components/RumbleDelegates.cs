@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using amBXLib.Net.Delegates.Components;
 using amBXLib.Net.Interface;
 
-namespace amBXLib.Net.Delegates
+namespace amBXLib.Net.Delegates.Components
 {
   public class RumbleDelegates : ComponentDelegates
   {

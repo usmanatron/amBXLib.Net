@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
-using amBXLib.Net.Delegates;
+using amBXLib.Net.Delegates.Components;
 using amBXLib.Net.Exceptions;
 using amBXLib.Net.Helpers;
-using amBXLib.Net.Device;
 
 namespace amBXLib.Net.Device.Components
 {

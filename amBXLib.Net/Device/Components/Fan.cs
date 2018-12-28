@@ -1,5 +1,5 @@
 ﻿using System;
-using amBXLib.Net.Delegates;
+using amBXLib.Net.Delegates.Components;
 using amBXLib.Net.Exceptions;
 
 namespace amBXLib.Net.Device.Components

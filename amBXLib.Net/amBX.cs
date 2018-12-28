@@ -6,7 +6,7 @@ using amBXLib.Net.Tasks;
 
 namespace amBXLib.Net
 {
-  public class amBX
+  public class amBX : IDisposable
   {
     private readonly amBXDeviceManager deviceManager;
     private readonly MainTaskManager mainTask;
@@ -62,7 +62,7 @@ namespace amBXLib.Net
       }
     }
 
-    public void Disconnect()
+    public void Dispose()
     {
       deviceManager.CheckConnection();
 
@@ -92,7 +92,7 @@ namespace amBXLib.Net
 
         ExceptionHelper.CheckForException(deviceManager.DeviceDelegates.Release(deviceManager.DevicePtr));
       }
-      finally 
+      finally
       {
         deviceManager.Disconnect();
       }

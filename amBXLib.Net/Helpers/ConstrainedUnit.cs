@@ -2,8 +2,13 @@
 {
   public class ConstrainedUnit : ConstrainedNumber
   {
-    public ConstrainedUnit(float value) : base(0, 1, value)
+    private readonly float value;
+
+    public ConstrainedUnit(float value) : base(0, 1)
     {
+      this.value = value;
     }
+
+    public float Value => Constrain(value);
   }
 }

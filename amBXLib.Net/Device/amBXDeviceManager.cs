@@ -10,10 +10,13 @@ namespace amBXLib.Net.Device
   /// Wraps the amBX device interface and its pointer for
   /// ease of usage elsewhere
   /// </summary>
-  public class amBXDeviceManager
+  public class amBXDeviceManager : amBXEntity
   {
-    public IntPtr DevicePtr { get; private set; }
     public DeviceDelegates DeviceDelegates { get; private set; }
+
+    public amBXDeviceManager(string name, IntPtr entityPtr) : base("amBX Device", IntPtr.Zero)
+    {
+    }
 
     /// <summary>
     /// Actually creates the amBX interface
@@ -24,26 +27,24 @@ namespace amBXLib.Net.Device
 
     public void Connect(uint majorVersion, uint minorVersion, string appName, string appVersion, bool useThreads)
     {
-      var ptr = IntPtr.Zero;
       try
       {
-        amBXCreateInterface(ref ptr, majorVersion, minorVersion, appName, appVersion, 0, useThreads);
+        amBXCreateInterface(ref EntityPtr, majorVersion, minorVersion, appName, appVersion, 0, useThreads);
       }
       catch (DllNotFoundException)
       {
         throw new amBXrtDllNotFoundException();
       }
 
-      DevicePtr = ptr;
       // Copy the function pointers to our output amBX object
       // Since the layouts match, the pointers should end up in the right slots automatically
-      var deviceInterface = Marshal.PtrToStructure<DeviceInterface>(DevicePtr);
+      var deviceInterface = Marshal.PtrToStructure<DeviceInterface>(EntityPtr);
 
       // Generate Delegates
       DeviceDelegates = new DeviceDelegates(deviceInterface);
     }
 
-    public bool IsConnected => DevicePtr != (IntPtr) 0;
+    public bool IsConnected => EntityPtr != (IntPtr) 0;
 
     public void CheckConnection()
     {
@@ -53,9 +54,9 @@ namespace amBXLib.Net.Device
       }
     }
 
-    public void Disconnect()
+    protected override void Release()
     {
-      DevicePtr = IntPtr.Zero;
+      EntityPtr = IntPtr.Zero;
       DeviceDelegates = null;
     }
   }

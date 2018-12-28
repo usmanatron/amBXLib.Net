@@ -7,19 +7,18 @@ namespace amBXLib.Net.Delegates
   /// <summary>
   /// Holds the delegates which connect to functions in DeviceInterface
   /// </summary>
-  public class DeviceDelegates
+  public class DeviceDelegates : EntityDelegates
   {
-    public readonly ReleaseDelegate Release;
-    public readonly CreateLightDelegate CreateLight;
-    public readonly CreateFanDelegate CreateFan;
-    public readonly CreateRumbleDelegate CreateRumble;
-    public readonly CreateMovieDelegate CreateMovie;
-    public readonly CreateEventDelegate CreateEvent;
-    public readonly SetAllEnabledDelegate SetAllEnabled;
-    public readonly UpdateDelegate Update;
-    public readonly GetVersionInfoDelegate GetVersionInfo;
-    public readonly RunThreadDelegate RunThread;
-    public readonly StopThreadDelegate StopThread;
+    public CreateLightDelegate CreateLight { get; }
+    public CreateFanDelegate CreateFan { get; }
+    public CreateRumbleDelegate CreateRumble { get; }
+    public CreateMovieDelegate CreateMovie { get; }
+    public CreateEventDelegate CreateEvent { get; }
+    public SetAllEnabledDelegate SetAllEnabled { get; }
+    public UpdateDelegate Update { get; }
+    public GetVersionInfoDelegate GetVersionInfo { get; }
+    public RunThreadDelegate RunThread { get; }
+    public StopThreadDelegate StopThread { get; }
 
     public DeviceDelegates(DeviceInterface amBXInterface)
     {
@@ -36,16 +35,11 @@ namespace amBXLib.Net.Delegates
       StopThread = Marshal.GetDelegateForFunctionPointer<StopThreadDelegate>(amBXInterface.StopThreadPtr);
     }
 
-
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBXOperationResult ReleaseDelegate(IntPtr devicePtr);
-
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate amBXOperationResult CreateLightDelegate(IntPtr devicePtr, ComponentDirection componentDirection, ComponentHeight componentHeight, ref IntPtr lightPtr);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate amBXOperationResult CreateFanDelegate(IntPtr devicePtr, ComponentDirection componentDirection, ComponentHeight componentHeight, ref IntPtr fanPtr);
-
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate amBXOperationResult CreateRumbleDelegate(IntPtr devicePtr, ComponentDirection componentDirection, ComponentHeight componentHeight, ref IntPtr rumblePtr);

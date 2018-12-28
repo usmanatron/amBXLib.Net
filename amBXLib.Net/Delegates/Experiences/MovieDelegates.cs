@@ -2,11 +2,10 @@
 using System.Runtime.InteropServices;
 using amBXLib.Net.Interface;
 
-namespace amBXLib.Net.Delegates
+namespace amBXLib.Net.Delegates.Experiences
 {
-  public class MovieDelegates
+  public class MovieDelegates : EntityDelegates
   {
-    public ReleaseDelegate Release;
     public SetFrozenDelegate SetFrozen;
     public GetFrozenDelegate GetFrozen;
     public SetSuspendedDelegate SetSuspended;
@@ -22,9 +21,6 @@ namespace amBXLib.Net.Delegates
       GetSuspended = Marshal.GetDelegateForFunctionPointer<GetSuspendedDelegate>(movInterface.GetSuspendedPtr);
       Seek = Marshal.GetDelegateForFunctionPointer<SeekDelegate>(movInterface.SeekPtr);
     }
-
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBXOperationResult ReleaseDelegate(IntPtr moviePtr);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate amBXOperationResult SetFrozenDelegate(IntPtr moviePtr, [MarshalAs(UnmanagedType.I1)] bool isFrozen);

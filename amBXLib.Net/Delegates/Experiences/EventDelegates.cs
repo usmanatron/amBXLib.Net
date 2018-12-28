@@ -2,19 +2,12 @@
 using System.Runtime.InteropServices;
 using amBXLib.Net.Interface;
 
-namespace amBXLib.Net.Delegates
+namespace amBXLib.Net.Delegates.Experiences
 {
-  //qqUMI Use this to commonise the entity requirement of this onto amBXEntity
-  interface IEntityDelegates
-  {
-
-  }
-
-  public class EventDelegates : IEntityDelegates
+  public class EventDelegates : EntityDelegates
   {
     public readonly PlayDelegate Play;
     public readonly StopDelegate Stop;
-    public readonly ReleaseDelegate Release;
 
     public EventDelegates(EventInterface evtinterface)
     {
@@ -28,8 +21,5 @@ namespace amBXLib.Net.Delegates
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate amBXOperationResult StopDelegate(IntPtr eventPttr);
-
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate amBXOperationResult ReleaseDelegate(IntPtr eventPtr);
   }
 }

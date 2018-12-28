@@ -9,17 +9,12 @@
       public float SpeedDelta;
 
 
-      public ComponentExtraProperties(long updateInterval, float intensityDelta) : this(updateInterval, intensityDelta, 0f)
-      {
-      }
-
-      public ComponentExtraProperties(long updateInterval, float intensityDelta, float speedDelta)
+      public ComponentExtraProperties(long updateInterval, float intensityDelta, float speedDelta = 0f)
       {
         UpdateIntervalMilliseconds = updateInterval;
         IntensityDelta = intensityDelta;
         SpeedDelta = speedDelta;
       }
-
 
       public ComponentExtraProperties Clone()
       {

@@ -3,6 +3,10 @@ using amBXLib.Net.Exceptions;
 
 namespace amBXLib.Net.Device.Components
 {
+  /// <summary>
+  /// A component is a physical piece of the whole amBX device.
+  /// There are three types of components: Light, Fan, and Rumble
+  /// </summary>
   public abstract class ComponentBase : amBXEntity
   {
     protected ComponentBase(string name, IntPtr componentPtr) : base(name, componentPtr)

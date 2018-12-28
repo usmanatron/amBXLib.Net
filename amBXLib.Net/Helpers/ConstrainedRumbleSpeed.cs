@@ -2,8 +2,13 @@
 {
   public class ConstrainedRumbleSpeed : ConstrainedNumber
   {
-    public ConstrainedRumbleSpeed(float value) : base(0, 10, value)
+    private readonly float value;
+
+    public ConstrainedRumbleSpeed(float value) : base(0, 10)
     {
+      this.value = value;
     }
+
+    public float Value => Constrain(value);
   }
 }
